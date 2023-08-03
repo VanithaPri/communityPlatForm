@@ -1,0 +1,67 @@
+<div class="dashboard">
+  <div class="box-view">
+
+    <div class="box-view-inner">
+      <div>Product</div>
+      <div>
+        <span>Total Product</span>
+        <span>37859</span>
+      </div>
+      <div class="progress-bar-container">
+        <div class="progress-bar blue" style="width: 50%;"></div>
+      </div>
+      <div>
+        <span>Total Product</span>
+        <span>37859</span>
+      </div>
+    </div>
+
+    <div class="box-view-inner">
+      <div>Sales</div>
+      <div>
+        <span>Total Product</span>
+        <span>37859</span>
+      </div>
+      <div class="progress-bar-container">
+        <div class="progress-bar purple" style="width: 50%;"></div>
+      </div>
+      <div>
+        <span>Total Product</span>
+        <span>37859</span>
+      </div>
+    </div>
+
+
+    <div class="box-view-inner">
+      <div>Orders</div>
+      <div>
+        <span>Total Product</span>
+        <span>37859</span>
+      </div>
+      <div class="progress-bar-container">
+        <div class="progress-bar green" style="width: 50%;"></div>
+      </div>
+      <div>
+        <span>Total Product</span>
+        <span>37859</span>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <input type="text" [(ngModel)]="searchText" placeholder="Search...">
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th *ngFor="let key of jsonData[0] | keyvalue">{{key.key}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of jsonData | filter:searchText">
+        <td *ngFor="let value of row | keyvalue">{{value.value}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
