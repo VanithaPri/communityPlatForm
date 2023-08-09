@@ -9,8 +9,8 @@ export class DataService {
   private jsonDataUrl = 'https://jsonplaceholder.typicode.com/users';
 
   constructor(private http: HttpClient) {}
-
-  getJsonData(): Observable<any> {
-    return this.http.get<any>(this.jsonDataUrl);
+  
+  getJsonData(): Observable<any[]> {
+    return this.http.get<any[]>(this.jsonDataUrl);
   }
 }

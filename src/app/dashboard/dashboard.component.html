@@ -2,66 +2,114 @@
   <div class="box-view">
 
     <div class="box-view-inner">
-      <div>Product</div>
-      <div>
+      <div class="box-title">Product</div>
+      <div class="d-center justify-content-between">
         <span>Total Product</span>
-        <span>37859</span>
+        <span class="blue f20">37859</span>
       </div>
       <div class="progress-bar-container">
         <div class="progress-bar blue" style="width: 50%;"></div>
       </div>
-      <div>
-        <span>Total Product</span>
-        <span>37859</span>
+      <div class="d-center justify-content-between">
+        <span>Change</span>
+        <span>50%</span>
       </div>
     </div>
 
     <div class="box-view-inner">
-      <div>Sales</div>
-      <div>
-        <span>Total Product</span>
-        <span>37859</span>
+      <div class="box-title">Sales</div>
+      <div class="d-center justify-content-between">
+        <span>Total Sales</span>
+        <span class="purple f20">1758</span>
       </div>
       <div class="progress-bar-container">
         <div class="progress-bar purple" style="width: 50%;"></div>
       </div>
-      <div>
-        <span>Total Product</span>
-        <span>37859</span>
+      <div class="d-center justify-content-between">
+        <span>Change</span>
+        <span>45%</span>
       </div>
     </div>
 
 
     <div class="box-view-inner">
-      <div>Orders</div>
-      <div>
+      <div class="box-title">Orders</div>
+      <div class="d-center justify-content-between">
         <span>Total Product</span>
-        <span>37859</span>
+        <span class="green f20">1385</span>
       </div>
       <div class="progress-bar-container">
         <div class="progress-bar green" style="width: 50%;"></div>
       </div>
-      <div>
-        <span>Total Product</span>
-        <span>37859</span>
+      <div class="d-center justify-content-between">
+        <span>Change</span>
+        <span>85%</span>
       </div>
     </div>
   </div>
 
-  <div>
-    <input type="text" [(ngModel)]="searchText" placeholder="Search...">
-  </div>
+  <div class="table-view">
+    <div class="d-center justify-content-between">
+      <div>
+        Show
+        <select>
+          <option>10</option>
+        </select>
+        entries
+      </div>
+      <div>
+        Search: <input type="text" [(ngModel)]="searchText">
+      </div>
+    </div>
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th *ngFor="let key of getOrderedKeys()" (click)="sortData(key)">
+            {{ key }}
+            <span *ngIf="sortBy === key">
+              <i class="fas " [ngClass]="{'fa-sort-up': sortOrder === 'asc', 'fa-sort-down': sortOrder === 'desc'}"></i>
+            </span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of jsonData | filter:searchText">
+          <td *ngFor="let key of getOrderedKeys()">
+            <ng-container *ngIf="key === 'address' || key === 'company'">
+              <span *ngIf="key === 'address'">
+                {{ row[key].street }}, {{ row[key].suite }}, {{ row[key].city }}, {{ row[key].zipcode }}
+              </span>
+              <span *ngIf="key === 'company'">
+                {{ row[key].name }} - {{ row[key].catchPhrase }} - {{ row[key].bs }}
+              </span>
+            </ng-container>
+            <span *ngIf="key !== 'address' && key !== 'company'">{{ row[key] }}</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
-  <table>
-    <thead>
-      <tr>
-        <th *ngFor="let key of jsonData[0] | keyvalue">{{key.key}}</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let row of jsonData | filter:searchText">
-        <td *ngFor="let value of row | keyvalue">{{value.value}}</td>
-      </tr>
-    </tbody>
-  </table>
+    <div class="d-flex justify-content-between align-items-center mt-3">
+      <div>
+        Showing {{ getStartIndex() }} to {{ getEndIndex() }} of {{ jsonData.length }} entries
+      </div>
+      <nav>
+        <ul class="pagination">
+          <li class="page-item">
+            <a class="page-link" href="#" aria-label="Previous">
+              <span aria-hidden="true">Previous</span>
+            </a>
+          </li>
+          <li class="page-item" *ngFor="let page of getPageNumbers()">
+            <a class="page-link" href="#">{{ page }}</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="#" aria-label="Next">
+              <span aria-hidden="true">Next</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
 </div>

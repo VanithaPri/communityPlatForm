@@ -1,13 +1,13 @@
 .header-section {
   position: fixed;
-  width: 80%;
+  width: calc(100vw - 230px);
   top: 0;
-  left: 20%;
+  left: 230px;
   height: 84px;
   @media screen and (max-width: 768px) {
     width: 100%;
     left: 0;
-  }  
+  }
 }
 .header-items {
   display: flex;
@@ -17,7 +17,7 @@
   padding: 5px 20px;
 }
 .header-left,
-.header-right{
+.header-right {
   color: white;
   font-size: 12px;
 }
@@ -29,7 +29,7 @@
   padding: 5px;
   width: 100%;
   margin-left: 20px;
-  background-color: rgba(0, 123,125, 0.1);
+  background-color: rgba(0, 123, 125, 0.1);
 }
 
 .search-input {
@@ -49,12 +49,12 @@ i {
   color: white;
   padding-right: 10px;
 }
-@media screen and (max-width:580px) {
+@media screen and (max-width: 580px) {
   .hide-mob {
     display: none;
   }
 }
-@media screen and (max-width:450px) {
+@media screen and (max-width: 450px) {
   .hide-lowDevice {
     display: none;
   }
